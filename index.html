@@ -32,9 +32,15 @@
 
         // Example of setting, getting, and deleting a cookie
         document.addEventListener("DOMContentLoaded", function() {
-            setCookie("username", "JohnDoe", 7); // Sets the username cookie
+            
             let username = getCookie("username"); // Retrieves the username cookie
+            if (username) {
+                console.log("Welcome back, " + username + "!");
+            } else {
+                console.log("Hello, new visitor!");
+            }
             console.log("Username:", username);
+            setCookie("username", "JohnDoe", 7); // Sets the username cookie
         });
     </script>
 </head>
