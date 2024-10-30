@@ -1,50 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cookie Example</title>
-    <script>
-        function setCookie(name, value, days) {
-            let expires = "";
-            if (days) {
-                let date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + (value || "") + expires + "; path=/";
-        }
-
-        function getCookie(name) {
-            let nameEQ = name + "=";
-            let ca = document.cookie.split(';');
-            for(let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-            }
-            return null;
-        }
-
-        function deleteCookie(name) {   
-            document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        }
-
-        // Example of setting, getting, and deleting a cookie
-        document.addEventListener("DOMContentLoaded", function() {
-            
-            let username = getCookie("username"); // Retrieves the username cookie
-            if (username) {
-                console.log("Welcome back, " + username + "!");
-            } else {
-                console.log("Hello, new visitor!");
-            }
-            console.log("Username:", username);
-            setCookie("username", "JohnDoe", 7); // Sets the username cookie
-        });
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown Rendered with md-block</title>
+  <!-- Link to md-block script from CDN -->
+  <script src="https://unpkg.com/@md-block/core"></script>
 </head>
 <body>
-    <h1>Welcome to the site!</h1>
+  <div id="markdown-container"></div>
+
+  <script>
+    // Fetch the Markdown file from the repository
+    fetch('./myfile.md')  // replace 'myfile.md' with your markdown file's path
+      .then(response => response.text())
+      .then(markdownContent => {
+        // Initialize md-block and mount the content
+        const mdBlock = new MdBlock.default();
+        mdBlock.mount("#markdown-container", markdownContent);
+      });
+  </script>
 </body>
 </html>
